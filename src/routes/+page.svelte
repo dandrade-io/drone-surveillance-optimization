@@ -46,28 +46,21 @@
 		if (!radius) return;
 		if (!prisonerSpeed) return;
 
-		cancelPrisionersAnimation = animatePrisioners(
-			prisonerSpeed,
-			radius,
-			pCtx,
-			bCanvas.height,
-			bCanvas.width
-		);
-
 		if (droneSpeed && num_slots) {
-			let _radius: number = radius / 2;
+			let _droneRadius: number = radius / 2;
+			let apothem: number = radius;
 
 			if (optionSelectedId === '2') {
-				const apothem: number = radius * Math.cos(Math.PI / num_vertices!);
-				_radius = apothem / 2;
+				apothem = radius * Math.cos(Math.PI / num_vertices!);
+				_droneRadius = apothem / 2;
 			}
 
 			const params: ProblemParams = {
-				R: _radius,
+				R: optionSelectedId === '2' ? apothem : radius,
 				vp: prisonerSpeed,
 				vd: droneSpeed,
-				rd: _radius,
-				rv: _radius,
+				rd: _droneRadius,
+				rv: _droneRadius,
 				n: num_slots
 			};
 
@@ -76,13 +69,21 @@
 
 			cancelDronesAnimation = animateDrones(
 				droneSpeed,
-				_radius,
+				_droneRadius,
 				droneRadians,
 				dCtx,
 				bCanvas.height,
 				bCanvas.width
 			);
 		}
+
+		cancelPrisionersAnimation = animatePrisioners(
+			prisonerSpeed,
+			radius,
+			pCtx,
+			bCanvas.height,
+			bCanvas.width
+		);
 	}
 
 	$effect(() => {
