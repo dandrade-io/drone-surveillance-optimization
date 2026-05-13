@@ -55,11 +55,15 @@
 		);
 
 		if (droneSpeed && num_slots) {
-			const _radius =
-				optionSelectedId === '1' ? radius / 2 : radius * Math.cos(Math.PI / num_vertices!);
+			let _radius: number = radius / 2;
+
+			if (optionSelectedId === '2') {
+				const apothem: number = radius * Math.cos(Math.PI / num_vertices!);
+				_radius = apothem / 2;
+			}
 
 			const params: ProblemParams = {
-				R: radius,
+				R: _radius,
 				vp: prisonerSpeed,
 				vd: droneSpeed,
 				rd: _radius,
@@ -68,6 +72,7 @@
 			};
 
 			const droneRadians: number[] = resolveCircle(params);
+			console.log(droneRadians);
 
 			cancelDronesAnimation = animateDrones(
 				droneSpeed,
