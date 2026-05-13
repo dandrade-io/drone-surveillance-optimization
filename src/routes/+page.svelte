@@ -147,7 +147,7 @@
 			</button>
 		</form>
 
-		<div class={`relative size-[${cSize}px] rounded-md border`}>
+		<div class="relative size-153.75 rounded-md border">
 			<canvas bind:this={bCanvas} width={cSize} height={cSize} class="absolute z-0"></canvas>
 			<canvas bind:this={dCanvas} width={cSize} height={cSize} class="absolute z-1"></canvas>
 			<canvas bind:this={pCanvas} width={cSize} height={cSize} class="absolute z-2"></canvas>
